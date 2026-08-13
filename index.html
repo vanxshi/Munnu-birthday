@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Munnu ♡ Birthday</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+*{box-sizing:border-box}body{margin:0;background:#fff8fc;color:#392638;font-family:'DM Sans',sans-serif}
+.page{min-height:100vh;display:none;padding:28px 18px 60px}.page.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card{width:min(94vw,650px);background:#fff;border:1px solid #efd9e7;border-radius:30px;padding:30px 22px;text-align:center;box-shadow:0 20px 60px #7a41601a}
+h1,h2{font-family:'Playfair Display',serif}h1{font-size:clamp(48px,12vw,82px);margin:12px 0}h2{font-size:clamp(31px,8vw,50px);margin:8px 0 15px}
+p{line-height:1.7}button{border:0;border-radius:999px;padding:13px 22px;margin:5px;background:#efbfd8;color:#392638;font-weight:700;font-size:15px;cursor:pointer}.ghost{background:#f8edf3}
+.kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.6}.envelope{font-size:68px;cursor:pointer;animation:bob 2s infinite}@keyframes bob{50%{transform:translateY(-8px)}}
+.grid{width:min(94vw,720px);display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0}.gift{min-height:150px;border:1px solid #efd2e2;border-radius:26px;background:linear-gradient(145deg,#fff,#fbe4ef);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.2s}.gift:hover{transform:translateY(-5px)}.emoji{font-size:45px}
+.modal{position:fixed;inset:0;background:#321d3080;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal.show{display:flex}.modalbox{width:min(94vw,570px);max-height:88vh;overflow:auto;background:#fffafd;border-radius:28px;padding:28px 20px;position:relative}.close{position:absolute;right:10px;top:10px;padding:8px 13px;background:#f5e8ef}
+.photo{width:100%;max-height:300px;object-fit:cover;border-radius:18px;margin:6px 0}.song{padding:14px;border:1px solid #efd8e5;border-radius:16px;margin:9px 0}.song a{color:#8b4f78;font-weight:700;text-decoration:none}.lore{text-align:left}.lore div{padding:13px;border-left:3px solid #dfa4c3;background:#fff5fa;margin:10px 0}
+#setup{padding-top:30px}.field{margin:12px 0;text-align:left}.field label{display:block;font-weight:700;margin-bottom:6px}.field input,.field textarea{width:100%;border:1px solid #e6cedc;border-radius:14px;padding:12px;font:inherit;background:#fff}.field textarea{min-height:90px;resize:vertical}.preview{font-size:12px;opacity:.6}
+.confetti{position:fixed;top:-25px;z-index:50;animation:fall linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section id="setup" class="page active">
+<div class="card">
+<div class="kicker">make it yours</div>
+<h2>🎀 Munnu Birthday Setup</h2>
+<p>Fill these in once, tap <b>Save & Preview</b>, and your birthday page is ready. Everything stays in this browser.</p>
+
+<div class="field"><label>Her name</label><input id="name" value="Mansi"></div>
+<div class="field"><label>Nickname</label><input id="nick" value="Munnu"></div>
+<div class="field"><label>Your birthday letter</label><textarea id="letter">Happy birthday to one of the people who can turn an ordinary day into a memory worth keeping.
+
+Thank you for the laughs, random conversations, ridiculous moments and all the little things that became our lore.
+
+I hope this year brings you beautiful surprises, unforgettable adventures and a million reasons to smile.
+
+Stay wonderfully, unapologetically you. ♡</textarea></div>
+<div class="field"><label>Memory 1</label><input id="mem1" placeholder="e.g. The day we first met..."></div>
+<div class="field"><label>Memory 2</label><input id="mem2" placeholder="e.g. That one insanely chaotic day..."></div>
+<div class="field"><label>Memory 3</label><input id="mem3" placeholder="e.g. Our funniest inside joke..."></div>
+<div class="field"><label>Song 1 — name</label><input id="song1" placeholder="Song name"></div>
+<div class="field"><label>Song 1 — link</label><input id="link1" placeholder="Paste Spotify/YouTube link"></div>
+<div class="field"><label>Song 2 — name</label><input id="song2" placeholder="Song name"></div>
+<div class="field"><label>Song 2 — link</label><input id="link2" placeholder="Paste Spotify/YouTube link"></div>
+
+<p class="preview">📸 For photos: after saving, use the photo buttons inside the page. You can choose images from your phone.</p>
+<button onclick="save()">Save & Preview 🎁</button>
+</div>
+</section>
+
+<section id="home" class="page">
+<div class="card"><div class="kicker">a little something for</div><div class="envelope" onclick="go('question')">💌</div><h1 id="homeNick">Munnu</h1><p>I could've just sent “happy birthday”…<br>but where's the fun in that?</p><button onclick="go('question');confetti()">Open it ♡</button></div>
+</section>
+
+<section id="question" class="page">
+<div class="card"><div style="font-size:48px">👀</div><div class="kicker">important question</div><h2>Ready for your birthday surprise?</h2><p>Warning: contains memories, feelings and an unreasonable amount of lore.</p><button onclick="go('gifts');confetti()">YES, obviously 🎀</button><button class="ghost" id="no" onmouseover="runAway()" onclick="runAway()">No 😭</button></div>
+</section>
+
+<section id="gifts" class="page">
+<div class="kicker">welcome to the archives</div><h2>Pick a gift 🎁</h2><p>Every box contains a tiny piece of the Munnu universe.</p>
+<div class="grid">
+<div class="gift" onclick="openGift('photos')"><div class="emoji">📸</div><b>Our chaos</b><small>photos & memories</small></div>
+<div class="gift" onclick="openGift('letter')"><div class="emoji">💌</div><b>For your eyes only</b><small>birthday letter</small></div>
+<div class="gift" onclick="openGift('songs')"><div class="emoji">🎧</div><b>Press play</b><small>soundtrack</small></div>
+<div class="gift" onclick="openGift('lore')"><div class="emoji">🕰️</div><b>The lore</b><small>your memories</small></div>
+</div><button class="ghost" onclick="go('final')">One last thing… ✨</button></section>
+
+<section id="final" class="page"><div class="card"><div style="font-size:60px">🎀</div><div class="kicker">final transmission</div><h2>Happy Birthday, <span id="finalNick">Munnu</span>!</h2><p>Here's to another year of laughing at things that aren't funny, making memories and collecting stories for future us.</p><p><b>You're one of those people who makes life more fun just by being in it. ♡</b></p><button onclick="confetti()">MORE CHAOS 🎉</button><button class="ghost" onclick="go('gifts')">Back to gifts</button></div></section>
+
+<div id="modal" class="modal" onclick="if(event.target===this)closeGift()"><div class="modalbox"><button class="close" onclick="closeGift()">×</button><div id="content"></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');scrollTo(0,0)}
+function save(){
+ const ids=['name','nick','letter','mem1','mem2','mem3','song1','link1','song2','link2'];
+ ids.forEach(id=>localStorage.setItem('munnu_'+id,$(id).value));
+ load();go('home');
+}
+function load(){
+ const ids=['name','nick','letter','mem1','mem2','mem3','song1','link1','song2','link2'];
+ ids.forEach(id=>{const v=localStorage.getItem('munnu_'+id);if(v!==null)$(id).value=v});
+ $('homeNick').textContent=$('nick').value||'Munnu';$('finalNick').textContent=$('nick').value||'Munnu';
+}
+function runAway(){const b=$('no');b.style.position='fixed';b.style.left=(5+Math.random()*78)+'vw';b.style.top=(15+Math.random()*70)+'vh'}
+function confetti(){const a=['💗','🎀','✨','🎉','🌸','💌','⭐'];for(let i=0;i<40;i++){let e=document.createElement('span');e.className='confetti';e.textContent=a[Math.floor(Math.random()*a.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(15+Math.random()*18)+'px';e.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),5500)}}
+function openGift(type){
+ let c='';
+ if(type==='letter')c='<h2>💌 Dear '+($('nick').value||'Munnu')+',</h2><p>'+($('letter').value||'Your letter goes here.').replace(/\n/g,'<br>')+'</p>';
+ if(type==='photos')c='<h2>📸 The Munnu Archives</h2><p class="preview">Choose photos from your phone. They are shown only in this browser.</p><input type="file" accept="image/*" multiple onchange="showPhotos(event)" id="photoPicker"><div id="photoPreview"></div>';
+ if(type==='songs')c='<h2>🎧 '+($('nick').value||'Munnu')+"'s Soundtrack</h2>"+songHTML('song1','link1')+songHTML('song2','link2');
+ if(type==='lore')c='<h2>🕰️ The Munnu Lore</h2><div class="lore">'+memoryHTML('mem1',1)+memoryHTML('mem2',2)+memoryHTML('mem3',3)+'</div><p><b>To be continued…</b></p>';
+ $('content').innerHTML=c;$('modal').classList.add('show');
+}
+function songHTML(n,l){let s=$(n).value,u=$(l).value;return '<div class="song">🎵 <b>'+(s||'Add a song')+'</b><br>'+(u?'<a href="'+u+'" target="_blank">Play song →</a>':'<span class="preview">Add a link in Setup</span>')+'</div>'}
+function memoryHTML(id,n){let x=$(id).value||'Add your memory here.';return '<div><b>Chapter '+n+':</b> '+x+'</div>'}
+function showPhotos(e){const out=$('photoPreview');out.innerHTML='';[...e.target.files].slice(0,6).forEach(f=>{let r=new FileReader();r.onload=x=>{let im=document.createElement('img');im.className='photo';im.src=x.target.result;out.appendChild(im)};r.readAsDataURL(f)})}
+function closeGift(){$('modal').classList.remove('show')}
+load();
+</script>
+</body>
+</html>
